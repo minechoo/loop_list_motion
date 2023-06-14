@@ -30,7 +30,7 @@ main .list li {
   left: 40%;
   z-index: 3;
   padding: 20px;
-  transition: 1s;
+  transition: 1s cubic-bezier(0.31, -0.32, 0.58, 0.98);
 }
 main .list li .inner {
   width: 100%;
@@ -96,28 +96,217 @@ main .list li:nth-of-type(2) .inner h2::before {
 }
 main .list li:nth-of-type(3) {
   left: calc(40% + 0vw);
+  transition-delay: 0s;
 }
 main .list li:nth-of-type(4) {
   left: calc(40% + 15vw);
+  transition-delay: 0.1s;
 }
 main .list li:nth-of-type(5) {
   left: calc(40% + 30vw);
+  transition-delay: 0.2s;
 }
 main .list li:nth-of-type(6) {
   left: calc(40% + 45vw);
+  transition-delay: 0.3s;
 }
 main .list li:nth-of-type(7) {
   left: calc(40% + 60vw);
+  transition-delay: 0.4s;
 }
 main .list li:nth-of-type(8) {
   left: calc(40% + 75vw);
+  transition-delay: 0.5s;
 }
 main .navi {
   position: absolute;
-  bottom: 5vh;
-  left: 50%;
+  top: calc(40% + 40vh + 20px);
+  left: 40%;
   z-index: 3;
-  color: #fff;
+  padding-left: 20px;
+}
+main .navi .prev,
+main .navi .next {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #bbb;
+  margin-right: 20px;
+  position: relative;
+}
+main .navi .prev::before, main .navi .prev::after,
+main .navi .next::before,
+main .navi .next::after {
+  content: "";
+  display: block;
+  width: 17px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+}
+main .navi .prev::before,
+main .navi .next::before {
+  transform: rotate(45deg) translateX(0px);
+}
+main .navi .prev::after,
+main .navi .next::after {
+  transform: rotate(-45deg) translateX(0px);
+}
+main .navi .prev span,
+main .navi .next span {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  opacity: 1;
+}
+main .navi .prev.on,
+main .navi .next.on {
+  animation: wrap 0.3s 1;
+}
+main .navi .prev::before, main .navi .prev::after {
+  left: 25px;
+  transform-origin: left center;
+}
+main .navi .prev span {
+  left: 25px;
+}
+main .navi .prev.on span {
+  animation: prevArrow 0.5s 1;
+}
+main .navi .next::before, main .navi .next::after {
+  right: 25px;
+  transform-origin: right center;
+}
+main .navi .next span {
+  right: 25px;
+}
+main .navi .next.on span {
+  animation: nextArrow 0.5s 1;
+}
+
+@keyframes wrap {
+  0% {
+    transform: scale(1);
+    border: 1px solid rgb(255, 255, 255);
+  }
+  70% {
+    transform: scale(2);
+    border: 1px solid rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+    border: 1px solid rgb(255, 255, 255);
+  }
+}
+@keyframes prevArrow {
+  0% {
+    left: 25px;
+    width: 20px;
+    opacity: 1;
+  }
+  70% {
+    left: -30px;
+    width: 50px;
+    opacity: 0;
+  }
+  71% {
+    left: 100px;
+    width: 120px;
+    opacity: 0;
+  }
+  100% {
+    left: 25px;
+    width: 20px;
+    opacity: 1;
+  }
+}
+@keyframes nextArrow {
+  0% {
+    right: 25px;
+    width: 20px;
+    opacity: 1;
+  }
+  70% {
+    right: -30px;
+    width: 50px;
+    opacity: 0;
+  }
+  71% {
+    right: 100px;
+    width: 120px;
+    opacity: 0;
+  }
+  100% {
+    right: 25px;
+    width: 20px;
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 979px) {
+  main .list li {
+    width: 30vw;
+    left: 45%;
+  }
+  main .list li:nth-of-type(3) {
+    left: calc(45% + 0vw);
+    transition-delay: 0s;
+  }
+  main .list li:nth-of-type(4) {
+    left: calc(45% + 30vw);
+    transition-delay: 0.1s;
+  }
+  main .list li:nth-of-type(5) {
+    left: calc(45% + 60vw);
+    transition-delay: 0.2s;
+  }
+  main .list li:nth-of-type(6) {
+    left: calc(45% + 90vw);
+    transition-delay: 0.3s;
+  }
+  main .list li:nth-of-type(7) {
+    left: calc(45% + 120vw);
+    transition-delay: 0.4s;
+  }
+  main .list li:nth-of-type(8) {
+    left: calc(45% + 150vw);
+    transition-delay: 0.5s;
+  }
+}
+@media screen and (max-width: 539px) {
+  main .list li {
+    width: 60vw;
+    left: 20%;
+    top: 60%;
+    height: 160px;
+  }
+  main .list li:nth-of-type(3) {
+    left: calc(20% + 0vw);
+    transition-delay: 0s;
+  }
+  main .list li:nth-of-type(4) {
+    left: calc(20% + 60vw);
+    transition-delay: 0.1s;
+  }
+  main .list li:nth-of-type(5) {
+    left: calc(20% + 120vw);
+    transition-delay: 0.2s;
+  }
+  main .list li:nth-of-type(6) {
+    left: calc(20% + 180vw);
+    transition-delay: 0.3s;
+  }
+  main .list li:nth-of-type(7) {
+    left: calc(20% + 240vw);
+    transition-delay: 0.4s;
+  }
+  main .list li:nth-of-type(8) {
+    left: calc(20% + 300vw);
+    transition-delay: 0.5s;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
